@@ -1,0 +1,1 @@
+"""Creates and runs the application. This is the starting module of the program."""
