@@ -5,5 +5,5 @@ from application import Application
 #create a test application object
 app = Application()
 
-#test printing the object
-print(app)
+#run the application
+app.run()

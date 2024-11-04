@@ -4,4 +4,5 @@ and running the guessin game.
 from guessinggame import GuessingGame
 
 class Application:
-   pass 
+   def run(self):
+      pass 
