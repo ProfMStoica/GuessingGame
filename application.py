@@ -14,6 +14,10 @@ class Application:
          #start the game 
          game.start()
 
+         #let the user know who won
+         print(f"{game.getWinner().getName()} won the game in {game.getRoundCount()} rounds with the guess {game.getWinner().getGuess()}")
+
+
          #check if the user wants to play again
          playAgain = self.checkPlayAgain()
 
