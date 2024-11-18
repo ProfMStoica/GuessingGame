@@ -18,7 +18,11 @@ class InteractivePlayer(Player): #InteractivePlayer IS-A Player
             #verify that the user guess is within the established range
             if (userGuess >= game.GuessingGame.getMinGuess() and 
                 userGuess <= game.GuessingGame.getMaxGuess()):
+                #the user has entered a valid guess
                 self._guess = userGuess
                 isGuessValid = True
+
+                #TODO: if the guess is not correct give them a hint whether it is too low or too high
+                #To complete the code here, it requires access to the game object the player is participating in
 
         
