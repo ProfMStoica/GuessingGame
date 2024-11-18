@@ -9,7 +9,11 @@ class InteractivePlayer(Player): #InteractivePlayer IS-A Player
         Player.__init__(self, name)
 
     def play(self):
+        #TODO: add error handling to ensure the user types a number in the required range by repeat ask
+
+        #TODO: provide game hints to tell the user if their guess is too low or too high.
+
         #ask the user for a guess between 0 and 9
-        self._guess = int(input(f"Please enter a number between {game.GuessingGame.s_minGuess} and {game.GuessingGame.s_maxGuess}: "))
+        self._guess = int(input(f"Please enter a number between {game.GuessingGame.getMinGuess()} and {game.GuessingGame.getMaxGuess()}: "))
 
         

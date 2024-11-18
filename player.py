@@ -20,6 +20,6 @@ class Player:
     
     def play(self):
         #generate a random number between in the game's range and remember it
-        self._guess = random.randint(game.GuessingGame.s_minGuess, game.GuessingGame.s_maxGuess)
+        self._guess = random.randint(game.GuessingGame.getMinGuess(), game.GuessingGame.getMaxGuess())
 
         

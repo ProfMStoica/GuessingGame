@@ -21,6 +21,19 @@ class GuessingGame:
         #make the game remember the winner
         self._winner = None
 
+    @staticmethod
+    def getMinGuess():
+        return GuessingGame.s_minGuess
+
+    @staticmethod    
+    def getMaxGuess():
+        return GuessingGame.s_maxGuess
+    
+    @staticmethod
+    def setGuessRange(minGuess, maxGuess):
+        GuessingGame.s_minGuess = minGuess
+        GuessingGame.s_maxGuess = maxGuess
+
     def  getWinner(self):
         return self._winner  
 
@@ -29,7 +42,7 @@ class GuessingGame:
 
     def start(self):
         #pick a number to be guessed in the game's guess range
-        self._answer = random.randint(GuessingGame.s_minGuess, GuessingGame.s_maxGuess)
+        self._answer = random.randint(GuessingGame.getMinGuess(), GuessingGame.getMaxGuess())
 
         #repeat asking the user to play for each round of the game until someone wins
         while self._winner == None:
