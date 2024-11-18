@@ -1,7 +1,8 @@
 """Defines the InteractivePlayer class"""
 
 from player import Player
-from guessinggame import GuessingGame
+
+import guessinggame as game #NOTE: This import syntax is required to avoid cirular import reference errors
 
 class InteractivePlayer(Player): #InteractivePlayer IS-A Player
     def __init__(self, name):
@@ -9,6 +10,6 @@ class InteractivePlayer(Player): #InteractivePlayer IS-A Player
 
     def play(self):
         #ask the user for a guess between 0 and 9
-        self._guess = int(input(f"Please enter a number between {GuessingGame.s_minGuess} and {GuessingGame.s_maxGuess}: "))
+        self._guess = int(input(f"Please enter a number between {game.GuessingGame.s_minGuess} and {game.GuessingGame.s_maxGuess}: "))
 
         
