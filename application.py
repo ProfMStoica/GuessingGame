@@ -25,13 +25,18 @@ class Application:
          #check if the user wants to play again
          playAgain = self.checkPlayAgain()
 
-   def askForGuessRange(self):
-      #ask the user for the range
-      userMinGuess = int(input("Please enter the minimum guess for players: "))
-      userMaxGuess = int(input("Please enter the maximum guess for players: "))
-      
-      #return the range of valid guesses
-      return (userMinGuess, userMaxGuess)
+   def askForGuessRange(self):      
+      while True:
+         try:
+            #ask the user for the range TODO: if invalid ask the users to try again
+            userMinGuess = int(input("Please enter the minimum guess for players: "))
+            userMaxGuess = int(input("Please enter the maximum guess for players: "))
+            
+            #return the range of valid guesses
+            return (userMinGuess, userMaxGuess)
+         except ValueError as ex:
+            #the input is incorrect, let the user know
+            print("Please enter a valid number")
    
    def checkPlayAgain(self):
       """Asks the user if they want to play again and returns true/false depending on the answer"""
