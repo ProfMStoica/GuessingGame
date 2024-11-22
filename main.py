@@ -2,8 +2,11 @@
 
 from application import Application
 
-#create a test application object
-app = Application()
+try:
+    #create a test application object
+    app = Application()
 
-#run the application
-app.run()
+    #run the application
+    app.run()
+except Exception as ex:
+    print(f"An unexpected error ocurred in the program. Please contact your administrator.\nError Message: {ex}")
