@@ -16,7 +16,7 @@ class GuessingGame:
         #create the three player objects
         self._larry = Player("Larry")
         self._curly = Player("Curly")
-        self._moe = InteractivePlayer("Moe")
+        self._moe = InteractivePlayer("Moe", self)
 
         #make the game remember the winner
         self._winner = None
@@ -34,11 +34,14 @@ class GuessingGame:
         GuessingGame.s_minGuess = minGuess
         GuessingGame.s_maxGuess = maxGuess
 
-    def  getWinner(self):
+    def getWinner(self):
         return self._winner  
 
     def getRoundCount(self):
         return self._roundCount
+    
+    def getAnswer(self):
+        return self._answer
 
     def start(self):
         #pick a number to be guessed in the game's guess range
