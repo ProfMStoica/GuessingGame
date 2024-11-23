@@ -1,6 +1,7 @@
 """Represents the guessing game application responsible for user interaction and for creating
 and running the guessin game.
 """
+from exceptions import OperationCancelled
 from guessinggame import GuessingGame
 
 class Application:
@@ -29,11 +30,23 @@ class Application:
       while True:
          try:
             #ask the user for the range TODO: if invalid ask the users to try again
-            userMinGuess = int(input("Please enter the minimum guess for players: "))
-            userMaxGuess = int(input("Please enter the maximum guess for players: "))
+            userMinGuessInput = input("Please enter the minimum guess for players: [press ENTER to cancel]")
+            if len(userMinGuessInput) == 0:
+               raise OperationCancelled("Setting the minimum guess was cancelled by the user")
+
+            userMaxGuessInput = input("Please enter the maximum guess for players: [press ENTER to cancel]")
+            if len(userMaxGuessInput) == 0:
+               raise OperationCancelled("Setting teh maximumg guess was cancelled by the user ")
+
+            #transform the user input
+            userMinGuess = int(userMinGuessInput)
+            userMaxGuess = int(userMaxGuessInput)
             
             #return the range of valid guesses
             return (userMinGuess, userMaxGuess)
+         except OperationCancelled as ex:
+            print(f"{ex}\nThe game will continue with the default range of 0 and 9")
+            return (0, 9)
          except ValueError as ex:
             #the input is incorrect, let the user know
             print("Please enter a valid number")
