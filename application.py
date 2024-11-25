@@ -1,7 +1,7 @@
 """Represents the guessing game application responsible for user interaction and for creating
 and running the guessin game.
 """
-from exceptions import OperationCancelled
+from exceptions import InvalidGuessRange, OperationCancelled
 from guessinggame import GuessingGame
 
 class Application:
@@ -36,17 +36,32 @@ class Application:
 
             userMaxGuessInput = input("Please enter the maximum guess for players: [press ENTER to cancel]")
             if len(userMaxGuessInput) == 0:
-               raise OperationCancelled("Setting teh maximumg guess was cancelled by the user ")
+               raise OperationCancelled("Setting the maximumg guess was cancelled by the user ")
 
             #transform the user input
             userMinGuess = int(userMinGuessInput)
             userMaxGuess = int(userMaxGuessInput)
+            if userMinGuess > userMaxGuess:
+               raise InvalidGuessRange(f"The range entered is not valid because the maximum guess is lower than the mininmum guess.")
             
             #return the range of valid guesses
             return (userMinGuess, userMaxGuess)
          except OperationCancelled as ex:
             print(f"{ex}\nThe game will continue with the default range of 0 and 9")
             return (0, 9)
+         except InvalidGuessRange as ex:            
+            #let the user know whta the error was
+            print(ex)
+            print("The program will use the reversed range instead.")
+            
+            #exchange the values of userMinGuess and userMaxGuess to handle this error
+            tempGuess = userMinGuess
+            userMinGuess = userMaxGuess
+            userMaxGuess = tempGuess
+
+            #return the corrected range to the caller
+            return (userMinGuess, userMaxGuess)
+
          except ValueError as ex:
             #the input is incorrect, let the user know
             print("Please enter a valid number")

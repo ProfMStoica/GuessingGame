@@ -3,3 +3,6 @@
 class OperationCancelled(Exception):
     """Raised when the user cancels an interaction with the program"""
     pass
+
+class InvalidGuessRange(Exception):
+    pass
