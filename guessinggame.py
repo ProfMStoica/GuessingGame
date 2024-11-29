@@ -54,10 +54,7 @@ class GuessingGame:
             self._roundCount += 1
 
             #ask each player to play and show their guess
-            for iPlayer in range(len(self._playerList)):
-                #access the current element in the list
-                crtPlayer = self._playerList[iPlayer]
-                
+            for crtPlayer in self._playerList:                
                 #ask the current player to play in the round
                 crtPlayer.play()
                 print(f"{crtPlayer.getName()} guessed {crtPlayer.getGuess()}")
@@ -66,9 +63,9 @@ class GuessingGame:
             self._winner = self.determineWinner()
 
     def determineWinner(self):
-        for iPlayer in range(len(self._playerList)):
-            #check the current player to see if their guess matched the answer
-            crtPlayer = self._playerList[iPlayer]
+        #TODO: replace the for loop with a for-each loop
+        for crtPlayer in self._playerList:
+            #check the current player to see if their guess matched the answer            
             if crtPlayer.getGuess() == self._answer:
                 #current player guessed correctly
                 return crtPlayer
