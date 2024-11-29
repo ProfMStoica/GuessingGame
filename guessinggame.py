@@ -14,9 +14,10 @@ class GuessingGame:
         self._roundCount = 0
 
         #create the three player objects
-        self._larry = Player("Larry")
-        self._curly = Player("Curly")
-        self._moe = InteractivePlayer("Moe", self)
+        self._playerList = []
+        self._playerList.append(Player("Larry"))
+        self._playerList.append(Player("Curly"))
+        self._playerList.append(InteractivePlayer("Moe", self))
 
         #make the game remember the winner
         self._winner = None
@@ -53,28 +54,24 @@ class GuessingGame:
             self._roundCount += 1
 
             #ask each player to play and show their guess
-            self._larry.play()
-            print(f"{self._larry.getName()} guessed {self._larry.getGuess()}")
-
-            self._curly.play()
-            print(f"{self._curly.getName()} guessed {self._curly.getGuess()}")
-
-            self._moe.play()
-            print(f"{self._moe.getName()} guessed {self._moe.getGuess()}")
+            for iPlayer in range(len(self._playerList)):
+                #access the current element in the list
+                crtPlayer = self._playerList[iPlayer]
+                
+                #ask the current player to play in the round
+                crtPlayer.play()
+                print(f"{crtPlayer.getName()} guessed {crtPlayer.getGuess()}")
 
             #determine if anybody won
             self._winner = self.determineWinner()
 
     def determineWinner(self):
-        #check each player to see if their guess matched the answer
-        if self._larry.getGuess() == self._answer:
-            #Larry guessed correctly
-            return self._larry        
-        elif self._curly.getGuess() == self._answer:
-            #Curly guessed correctly
-            return self._curly
-        elif self._moe.getGuess() == self._answer:
-            #Moe guessed correctly
-            return self._moe
-        else:
-            return None
+        for iPlayer in range(len(self._playerList)):
+            #check the current player to see if their guess matched the answer
+            crtPlayer = self._playerList[iPlayer]
+            if crtPlayer.getGuess() == self._answer:
+                #current player guessed correctly
+                return crtPlayer
+
+        #none of the players have guessed so there is no winner yet
+        return None

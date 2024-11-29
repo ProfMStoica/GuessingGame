@@ -24,8 +24,6 @@ class InteractivePlayer(Player): #InteractivePlayer IS-A Player
                     #the user has entered a valid guess
                     self._guess = userGuess
                     isGuessValid = True
-            
-                self._guess = float(input(...))
                     
             #guess is valid, check if it is too high or too low
             #give the user a hint whether it is too low or too high
