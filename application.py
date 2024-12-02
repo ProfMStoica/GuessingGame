@@ -3,12 +3,15 @@ and running the guessin game.
 """
 from exceptions import InvalidGuessRange, OperationCancelled
 from guessinggame import GuessingGame
+from interactiveplayer import InteractivePlayer
+from player import Player
 
 class Application:
-   def run(self):
+   def __init__(self):
       #create the game
-      game = GuessingGame()
+      self._game = GuessingGame()
 
+   def run(self):
       #ask the user to determine the guess range
       userMinGuess, userMaxGuess = self.askForGuessRange()
       GuessingGame.setGuessRange(userMinGuess, userMaxGuess)
@@ -16,15 +19,43 @@ class Application:
       #repeat playing the game for as long as the user wants to play
       playAgain = True
       while playAgain:      
+         #configure the game with its players
+         self.setupGame()
+
          #start the game 
-         game.start()
+         self._game.start()
 
          #let the user know who won
-         print(f"{game.getWinner().getName()} won the game in {game.getRoundCount()} rounds with the guess {game.getWinner().getGuess()}")
+         print(f"{self._game.getWinner().getName()} won the game in {self._game.getRoundCount()} rounds with the guess {self._game.getWinner().getGuess()}")
 
 
          #check if the user wants to play again
          playAgain = self.checkPlayAgain()
+
+   def setupGame(self):
+      """Interact with the user to determine the number of players and their information (name and type)
+         #configure the game so that it is played in the confirmation determined by the user"""
+      #repeat asking for player and their characteristics until the user is done configuring the game
+      morePlayers = True
+      while morePlayers:
+         #ask the user for the player's name
+         playerName = input("Please enter the name of the player [ENTER to exit]")
+         if len(playerName) == 0:
+             #the user does not want anymore players, they  pressed ENTER
+             morePlayers = False
+         else:            
+            #ask the user for the player's type, AI or Interactive
+            playerType = input("Please enter the type of player (A for AI, H for Human)")
+
+            #create a player with the given name and 
+            player = None #optional in Python
+            if playerType.upper() == "A":
+               player = Player(playerName)
+            elif playerType.upper() == "H":
+               player = InteractivePlayer(playerName, self._game)
+               
+            #add the player to the game
+            self._game.addPlayer(player)
 
    def askForGuessRange(self):      
       while True:

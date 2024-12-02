@@ -15,9 +15,6 @@ class GuessingGame:
 
         #create the three player objects
         self._playerList = []
-        self._playerList.append(Player("Larry"))
-        self._playerList.append(Player("Curly"))
-        self._playerList.append(InteractivePlayer("Moe", self))
 
         #make the game remember the winner
         self._winner = None
@@ -43,6 +40,10 @@ class GuessingGame:
     
     def getAnswer(self):
         return self._answer
+
+    def addPlayer(self, player):
+        """Adds a player to the list of players"""
+        self._playerList.append(player)
 
     def start(self):
         #pick a number to be guessed in the game's guess range
