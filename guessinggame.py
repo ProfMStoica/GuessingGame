@@ -50,6 +50,8 @@ class GuessingGame:
         self._answer = random.randint(GuessingGame.getMinGuess(), GuessingGame.getMaxGuess())
 
         #repeat asking the user to play for each round of the game until someone wins
+        self._roundCount = 0
+        self._winner = None
         while self._winner == None:
             #increment the round
             self._roundCount += 1

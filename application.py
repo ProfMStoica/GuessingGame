@@ -16,12 +16,12 @@ class Application:
       userMinGuess, userMaxGuess = self.askForGuessRange()
       GuessingGame.setGuessRange(userMinGuess, userMaxGuess)
 
+      #configure the game with its players
+      self.setupGame()
+
       #repeat playing the game for as long as the user wants to play
       playAgain = True
       while playAgain:      
-         #configure the game with its players
-         self.setupGame()
-
          #start the game 
          self._game.start()
 
