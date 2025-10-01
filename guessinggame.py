@@ -13,8 +13,9 @@ class GuessingGame:
         self._answer = -1
         self._roundCount = 0
 
-        #create the three player objects
-        self._playerList = []
+        #define a dictionary of players that organizes players by their names
+        #name --> Player instances
+        self._playerStore = {}
 
         #make the game remember the winner
         self._winner = None
@@ -43,7 +44,7 @@ class GuessingGame:
 
     def addPlayer(self, player):
         """Adds a player to the list of players"""
-        self._playerList.append(player)
+        self._playerStore[player.getName()] = player
 
     def start(self):
         #pick a number to be guessed in the game's guess range
@@ -57,21 +58,27 @@ class GuessingGame:
             self._roundCount += 1
 
             #ask each player to play and show their guess
-            for crtPlayer in self._playerList:                
+            for playerName in self._playerStore:                
+                #search for the player with the given name (key)
+                player = self._playerStore[playerName]
+                
                 #ask the current player to play in the round
-                crtPlayer.play()
-                print(f"{crtPlayer.getName()} guessed {crtPlayer.getGuess()}")
+                player.play()
+                print(f"{player.getName()} guessed {player.getGuess()}")
 
             #determine if anybody won
             self._winner = self.determineWinner()
 
     def determineWinner(self):
         #TODO: replace the for loop with a for-each loop
-        for crtPlayer in self._playerList:
+        for playerName in self._playerStore:
+            #search for the player with this name
+            player = self._playerStore[playerName]
+            
             #check the current player to see if their guess matched the answer            
-            if crtPlayer.getGuess() == self._answer:
+            if player.getGuess() == self._answer:
                 #current player guessed correctly
-                return crtPlayer
+                return player
 
         #none of the players have guessed so there is no winner yet
         return None
